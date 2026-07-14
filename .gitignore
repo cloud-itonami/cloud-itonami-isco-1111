@@ -1,0 +1,13 @@
+.cpcache/
+.clj-kondo/
+target/
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+node_modules/
+dist/
+build/
+*.jar
