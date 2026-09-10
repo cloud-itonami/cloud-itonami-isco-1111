@@ -54,10 +54,10 @@ Full itonami Actor pattern (per ADR-2607011000 / CLAUDE.md's Actors section): a 
                                            +-> :hold               (:hard? true)
 ```
 
-- `src/legislature/store.cljc` — `Store` protocol + `MemStore`: constituent records, bills, office requests, an append-only audit ledger.
-- `src/legislature/advisor.cljc` — `Advisor` protocol; `mock-advisor` (deterministic, default) proposes an office operation from a request; `llm-advisor` wraps a `langchain.model/ChatModel` — either way the advisor only ever produces a `:propose`-effect proposal, never a committed record, and LLM parse failures always yield `confidence 0.0` (forces escalation, never fabricated confidence).
-- `src/legislature/governor.cljc` — `LegislativeGovernor/check`: a pure function, wired as its own `:govern` node. Hard invariants (unregistered constituent, unverified bill, a proposal whose `:effect` isn't `:propose`) always route to `:hold`. Escalation invariants (sensitive topics, `:flag-conflict-of-interest`, or low advisor confidence) always route to `:request-approval` — an `interrupt-before` node that the graph checkpoints and only resumes on explicit human approval (`actor/approve!`).
-- `src/legislature/actor.cljc` — `build-graph`, `run-request!`, `approve!`: the `langgraph.graph/state-graph` wiring itself.
+- `src/legislature/store.kotoba` — `Store` protocol + `MemStore`: constituent records, bills, office requests, an append-only audit ledger.
+- `src/legislature/advisor.kotoba` — `Advisor` protocol; `mock-advisor` (deterministic, default) proposes an office operation from a request; `llm-advisor` wraps a `langchain.model/ChatModel` — either way the advisor only ever produces a `:propose`-effect proposal, never a committed record, and LLM parse failures always yield `confidence 0.0` (forces escalation, never fabricated confidence).
+- `src/legislature/governor.kotoba` — `LegislativeGovernor/check`: a pure function, wired as its own `:govern` node. Hard invariants (unregistered constituent, unverified bill, a proposal whose `:effect` isn't `:propose`) always route to `:hold`. Escalation invariants (sensitive topics, `:flag-conflict-of-interest`, or low advisor confidence) always route to `:request-approval` — an `interrupt-before` node that the graph checkpoints and only resumes on explicit human approval (`actor/approve!`).
+- `src/legislature/actor.kotoba` — `build-graph`, `run-request!`, `approve!`: the `langgraph.graph/state-graph` wiring itself.
 
 Proposal ops (all `:effect :propose` only, closed allowlist):
 - `:draft-briefing` — prepare a policy briefing document for legislator review.
