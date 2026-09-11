@@ -67,7 +67,7 @@ Proposal ops (all `:effect :propose` only, closed allowlist):
 - `:flag-conflict-of-interest` — surface a potential conflict for the legislator's attention (always escalates).
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 This is what backs this repo's `:maturity :implemented` entry in [`kotoba-lang/occupation`](https://github.com/kotoba-lang/occupation).
