@@ -13,7 +13,7 @@ Thank you for considering contributing to this open-occupation blueprint. This i
 1. Fork and create a branch for your change.
 2. For code changes:
    - Follow the existing `.cljc` portable-code pattern (no platform-specific code in core).
-   - Ensure all tests pass: `clojure -M:test`.
+   - Ensure all tests pass: `kbb -M:test`.
    - Add tests for new behavior.
 3. For governance/architecture changes:
    - Start with an ADR in `docs/adr/` (follow the ADR template).
@@ -29,7 +29,7 @@ Thank you for considering contributing to this open-occupation blueprint. This i
 ## Testing
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
 
 All tests must pass. New functionality should include tests.
